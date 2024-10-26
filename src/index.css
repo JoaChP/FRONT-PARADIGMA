@@ -3,73 +3,150 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
+/* Estilos globales */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Colores personalizados */
+  --color-primary: #646cff;
+  --color-primary-hover: #535bf2;
+  --color-bg-dark: #242424;
+  --color-bg-light: #ffffff;
+  --color-text-dark: rgba(255, 255, 255, 0.87);
+  --color-text-light: #213547;
+  --color-button-dark: #1a1a1a;
+  --color-button-light: #f9f9f9;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* Colores para modo claro y oscuro */
 body {
+  color: var(--color-text-dark);
+  background-color: var(--color-bg-dark);
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+@media (prefers-color-scheme: light) {
+  body {
+    color: var(--color-text-light);
+    background-color: var(--color-bg-light);
+  }
+}
+
+/* Enlaces */
+a {
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.5em;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
 }
 
+/* Botones */
 button {
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-button-dark);
+  color: var(--color-text-dark);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-primary);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--color-primary-hover);
+}
+@media (prefers-color-scheme: light) {
+  button {
+    background-color: var(--color-button-light);
+    color: var(--color-text-light);
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Contenedores de tarjetas y tablas */
+.container {
+  max-width: 1200px;
+  padding: 2rem;
+  margin: 0 auto;
+}
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+th, td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+  color: #333333;
+}
+td {
+  color: #666666;
+}
+tr:hover td {
+  background-color: #f1f1f1;
+}
+
+/* Otros ajustes */
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.3);
 }

@@ -1,17 +1,14 @@
 import axios from 'axios';
 
-const API_URL = 'https://tu-api-url.com'; // Reemplaza con la URL correcta de tu backend
+const API_URL = 'https://tu-api-url.com'; // Cambia esto por la URL de tu API
 
-export const fetchData = async (endpoint, options) => {
+// Función para obtener la lista de errores
+export const getErrors = async () => {
   try {
-    const response = await axios({
-      url: `${API_URL}${endpoint}`,
-      method: options.method || 'GET',
-      data: options.body || {},
-    });
-    return response.data;
+    const response = await axios.get(`${API_URL}/api/errors`);
+    return response.data; // Supone que `data` es la lista de errores
   } catch (error) {
-    // Lanza el mensaje de error del backend o un mensaje general
-    throw new Error(error.response?.data?.message || 'Error en la solicitud');
+    console.error("Error al obtener los errores:", error);
+    throw error;
   }
 };

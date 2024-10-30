@@ -1,24 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const ErrorLog = () => {
-  const [errors, setErrors] = useState([]); // Estado para almacenar los errores
+  // Datos quemados de errores
+  const initialErrors = [
+    {
+      id: 1,
+      type: 'controlled',
+      message: 'Error de validación en el formulario',
+      timestamp: '2024-10-29T10:30:00Z',
+    },
+    {
+      id: 2,
+      type: 'exception',
+      message: 'Excepción en la conexión con la base de datos',
+      timestamp: '2024-10-29T11:00:00Z',
+    },
+    {
+      id: 3,
+      type: 'controlled',
+      message: 'Error al cargar los datos del usuario',
+      timestamp: '2024-10-29T12:15:00Z',
+    },
+    {
+      id: 4,
+      type: 'exception',
+      message: 'Error inesperado en el servidor',
+      timestamp: '2024-10-29T13:00:00Z',
+    },
+  ];
+
+  const [errors, setErrors] = useState(initialErrors); // Estado para almacenar los errores
   const [filter, setFilter] = useState(''); // Estado para el filtro de errores
-
-  // Conectar con EventSource al montar el componente
-  useEffect(() => {
-    const eventSource = new EventSource('http://localhost:3000/api/errors/stream');
-
-    // Al recibir un mensaje, agregar el error al estado
-    eventSource.onmessage = (event) => {
-      const newError = JSON.parse(event.data);
-      setErrors((prevErrors) => [newError, ...prevErrors]);
-    };
-
-    // Limpiar la conexión al desmontar el componente
-    return () => {
-      eventSource.close();
-    };
-  }, []);
 
   // Filtrar errores según el estado del filtro
   const filteredErrors = errors.filter((error) =>

@@ -6,7 +6,8 @@ export const ErrorLog = () => {
 
   // Conectar con EventSource al montar el componente
   useEffect(() => {
-    const eventSource = new EventSource('http://localhost:3000/api/errors/stream');
+    // Cambiar la ruta del EventSource al nuevo endpoint en el backend
+    const eventSource = new EventSource('http://localhost:5000/api/errorlogs/stream');
 
     // Al recibir un mensaje, agregar el error al estado
     eventSource.onmessage = (event) => {

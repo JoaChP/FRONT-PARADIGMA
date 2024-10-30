@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Sidebar = () => {
   const [isConnected, setIsConnected] = useState(true); // Indicador de conexión
@@ -18,18 +19,23 @@ export const Sidebar = () => {
 
         {/* Menú de Enlaces para Temas de Manejo de Errores */}
         <nav className="flex flex-col space-y-6 px-6 text-lg">
-          <a href="#dashboard" className="text-white hover:text-gray-200">
+          <Link to="/error-log" className="text-white hover:text-gray-200">
+            Log de Errores  
+          </Link>
+        </nav>
+        <nav className="flex flex-col space-y-6 px-6 text-lg">
+          <Link to="/dashboard" className="text-white hover:text-gray-200">
             Dashboard
-          </a>
-          <a href="#logs" className="text-white hover:text-gray-200">
+          </Link>
+          <Link to="/logs" className="text-white hover:text-gray-200">
             Logs
-          </a>
-          <a href="#reports" className="text-white hover:text-gray-200">
+          </Link>
+          <Link to="/reports" className="text-white hover:text-gray-200">
             Reportes
-          </a>
-          <a href="#statistics" className="text-white hover:text-gray-200">
+          </Link>
+          <Link to="/stats" className="text-white hover:text-gray-200">
             Estadísticas
-          </a>
+          </Link>
         </nav>
       </div>
     </aside>

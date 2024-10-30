@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-// import Dashboard from './pages/Dashboard';
-// import Logs from './pages/Logs';
-// import Reports from './pages/Reports';
 import Stats from './components/Stats';
+import ErrorLog from './components/Errolog';
 
 const App = () => {
   return (
@@ -12,10 +10,8 @@ const App = () => {
         <Sidebar />
         <div className="flex-1 p-6">
           <Routes>
-            {/* <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/logs" element={<Logs />} /> */}
-            {/* <Route path="/reports" element={<Reports />} /> */}
-            <Route path="/statisti" element={<Stats />} />
+            <Route path="/stats" element={<Stats />} />
+            <Route path="/error-log" element={<ErrorLog />} /> {/* Ruta para ErrorLog */}
           </Routes>
         </div>
       </div>

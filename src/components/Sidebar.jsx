@@ -5,7 +5,7 @@ export const Sidebar = () => {
   const [isConnected, setIsConnected] = useState(true); // Indicador de conexión
 
   return (
-    <aside className="bg-blue-700 h-screen w-64 shadow-lg">
+    <aside className="bg-blue-950 h-screen w-64 shadow-lg">
       <div className="flex flex-col h-full py-6 space-y-8">
         {/* Título del Sidebar */}
         <div className="text-white font-bold text-2xl px-6">
@@ -26,9 +26,6 @@ export const Sidebar = () => {
         <nav className="flex flex-col space-y-6 px-6 text-lg">
           <Link to="/dashboard" className="text-white hover:text-gray-200">
             Dashboard
-          </Link>
-          <Link to="/logs" className="text-white hover:text-gray-200">
-            Logs
           </Link>
           <Link to="/reports" className="text-white hover:text-gray-200">
             Reportes

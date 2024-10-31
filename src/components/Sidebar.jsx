@@ -27,9 +27,6 @@ export const Sidebar = () => {
           <Link to="/dashboard" className="text-white hover:text-gray-200">
             Dashboard
           </Link>
-          <Link to="/reports" className="text-white hover:text-gray-200">
-            Reportes
-          </Link>
           <Link to="/stats" className="text-white hover:text-gray-200">
             Estadísticas
           </Link>

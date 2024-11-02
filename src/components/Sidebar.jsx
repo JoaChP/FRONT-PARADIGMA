@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaExclamationTriangle, FaChartBar, FaTachometerAlt } from 'react-icons/fa';
 
 export const Sidebar = () => {
   const [isConnected, setIsConnected] = useState(true); // Indicador de conexión
@@ -19,14 +20,17 @@ export const Sidebar = () => {
 
         {/* Menú de Enlaces para Temas de Manejo de Errores */}
         <nav className="flex flex-col space-y-4 px-6 text-lg mt-6">
-          <Link to="/error-log" className="text-gray-100 hover:text-gray-300">
-            Log de Errores  
+          <Link to="/error-log" className="text-gray-100 hover:text-gray-300 flex items-center space-x-2">
+            <FaExclamationTriangle />
+            <span>Log de Errores</span>
           </Link>
-          <Link to="/dashboard" className="text-gray-100 hover:text-gray-300">
-            Dashboard
+          <Link to="/dashboard" className="text-gray-100 hover:text-gray-300 flex items-center space-x-2">
+            <FaTachometerAlt />
+            <span>Dashboard</span>
           </Link>
-          <Link to="/stats" className="text-gray-100 hover:text-gray-300">
-            Estadísticas
+          <Link to="/stats" className="text-gray-100 hover:text-gray-300 flex items-center space-x-2">
+            <FaChartBar />
+            <span>Estadísticas</span>
           </Link>
         </nav>
       </div>

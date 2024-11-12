@@ -5,10 +5,24 @@ export const ErrorLog = () => {
   const [errors, setErrors] = useState([]); // Estado para almacenar los errores
   const [filter, setFilter] = useState(''); // Estado para el filtro de errores
 
+  // Obtener todos los errores al cargar la página
+  useEffect(() => {
+    const fetchAllErrors = async () => {
+      try {
+        const response = await fetch('https://localhost:7209/api/ErrorLog');
+        const allErrors = await response.json();
+        setErrors((prevErrors) => [...allErrors, ...prevErrors]);
+      } catch (error) {
+        console.error('Error cargando los errores iniciales:', error);
+      }
+    };
+
+    fetchAllErrors();
+  }, []);
+
   // Conectar con EventSource al montar el componente
   useEffect(() => {
-    // Cambiar la ruta del EventSource al nuevo endpoint en el backend
-    const eventSource = new EventSource('http://localhost:5000/api/errorlogs/stream');
+    const eventSource = new EventSource('https://localhost:7209/api/ErrorLog/stream');
 
     // Al recibir un mensaje, agregar el error al estado
     eventSource.onmessage = (event) => {
@@ -23,9 +37,14 @@ export const ErrorLog = () => {
   }, []);
 
   // Filtrar errores según el estado del filtro
-  const filteredErrors = errors.filter((error) =>
-    filter ? error.type.includes(filter) : true
-  );
+  const filteredErrors = errors.filter((error) => {
+    if (filter === 'controlled') {
+      return error.isControlled === true;
+    } else if (filter === 'exception') {
+      return error.isControlled === false;
+    }
+    return true; // Mostrar todos si no hay filtro
+  });
 
   return (
     <div className="p-6 bg-gray-900 min-h-screen">
@@ -53,13 +72,13 @@ export const ErrorLog = () => {
               <li
                 key={error.id}
                 className={`p-4 rounded-lg shadow flex items-start space-x-4 ${
-                  error.type === 'exception'
+                  error.isControlled === false
                     ? 'bg-red-700 text-red-100'
                     : 'bg-green-700 text-green-100'
                 }`}
               >
                 <div className="mt-1">
-                  {error.type === 'exception' ? (
+                  {error.isControlled === false ? (
                     <FaExclamationTriangle className="text-2xl" />
                   ) : (
                     <FaInfoCircle className="text-2xl" />
@@ -67,13 +86,13 @@ export const ErrorLog = () => {
                 </div>
                 <div>
                   <p className="mb-2">
-                    <strong>Tipo:</strong> {error.type === 'exception' ? 'Excepción' : 'Error Controlado'}
+                    <strong>Tipo:</strong> {error.isControlled === false ? 'Excepción' : 'Error Controlado'}
                   </p>
                   <p className="mb-2">
-                    <strong>Mensaje:</strong> {error.message}
+                    <strong>Mensaje:</strong> {JSON.parse(error.errorJson).message || 'Sin mensaje'}
                   </p>
                   <p className="text-sm">
-                    <strong>Fecha:</strong> {new Date(error.timestamp).toLocaleString()}
+                    <strong>Fecha:</strong> {new Date(error.occurredAt).toLocaleString()}
                   </p>
                 </div>
               </li>

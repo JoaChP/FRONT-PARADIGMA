@@ -5,7 +5,7 @@ export const ErrorDashboard = () => {
 
   // Conectar con EventSource al montar el componente
   useEffect(() => {
-    const eventSource = new EventSource('http://localhost:5000/api/errorlogs/stream');
+    const eventSource = new EventSource('https://localhost:7209/api/ErrorLog/stream');
 
     // Al recibir un mensaje, actualizar el estado con solo el nuevo error
     eventSource.onmessage = (event) => {

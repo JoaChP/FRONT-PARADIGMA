@@ -70,7 +70,7 @@ export const ErrorLog = () => {
           <ul className="space-y-4">
             {filteredErrors.map((error) => (
               <li
-                key={error.id}
+                key={error._id}
                 className={`p-4 rounded-lg shadow flex items-start space-x-4 ${
                   error.isControlled === false
                     ? 'bg-red-700 text-red-100'
@@ -83,19 +83,30 @@ export const ErrorLog = () => {
                   ) : (
                     <FaInfoCircle className="text-2xl" />
                   )}
-
-
-                  
                 </div>
                 <div>
                   <p className="mb-2">
-                    <strong>Tipo:</strong> {error.isControlled === false ? 'Excepción' : 'Error Controlado'}
+                    <strong>ID:</strong> {error._id}
                   </p>
                   <p className="mb-2">
-                    <strong>Mensaje:</strong> {JSON.parse(error.errorJson).message || 'Sin mensaje'}
+                    <strong>Número de Tarjeta:</strong> {error.CardNumber}
                   </p>
-                  <p className="text-sm">
-                    <strong>Fecha:</strong> {new Date(error.occurredAt).toLocaleString()}
+                  <p className="mb-2">
+                    <strong>Fecha de Compra:</strong>{' '}
+                    {new Date(error.PurchaseDate).toLocaleString()}
+                  </p>
+                  <p className="mb-2">
+                    <strong>Monto:</strong> ${error.Amount.toFixed(2)}
+                  </p>
+                  <p className="mb-2">
+                    <strong>Estado:</strong> {error.Status}
+                  </p>
+                  <p className="mb-2">
+                    <strong>Mensaje de Error:</strong> {error.ErrorMessage}
+                  </p>
+                  <p className="mb-2">
+                    <strong>Es Reintentable:</strong>{' '}
+                    {error.IsRetryable ? 'Sí' : 'No'}
                   </p>
                 </div>
               </li>

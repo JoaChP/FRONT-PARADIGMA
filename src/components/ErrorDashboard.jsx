@@ -29,23 +29,29 @@ export const ErrorDashboard = () => {
           <table className="min-w-full bg-gray-800">
             <thead>
               <tr>
-                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Tipo de Error</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">ID</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Número de Tarjeta</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Fecha de Compra</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Monto</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Estado</th>
                 <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Mensaje</th>
-                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Fecha</th>
+                <th className="px-4 py-2 border-b border-gray-700 text-left text-gray-300">Es Reintentable</th>
               </tr>
             </thead>
             <tbody>
               {errors.map((error, index) => (
                 <tr key={index} className="border-b border-gray-700">
-                  <td
-                    className={`px-4 py-2 ${
-                      error.type === 'exception' ? 'text-red-500' : 'text-green-500'
-                    }`}
-                  >
-                    {error.type === 'exception' ? 'Excepción' : 'Error Controlado'}
+                  <td className="px-4 py-2 text-gray-100">{error._id}</td>
+                  <td className="px-4 py-2 text-gray-100">{error.CardNumber}</td>
+                  <td className="px-4 py-2 text-gray-100">
+                    {new Date(error.PurchaseDate).toLocaleString()}
                   </td>
-                  <td className="px-4 py-2 text-gray-100">{error.message}</td>
-                  <td className="px-4 py-2 text-gray-100">{new Date(error.timestamp).toLocaleString()}</td>
+                  <td className="px-4 py-2 text-gray-100">${error.Amount.toFixed(2)}</td>
+                  <td className="px-4 py-2 text-gray-100">{error.Status}</td>
+                  <td className="px-4 py-2 text-gray-100">{error.ErrorMessage}</td>
+                  <td className="px-4 py-2 text-gray-100">
+                    {error.IsRetryable ? 'Sí' : 'No'}
+                  </td>
                 </tr>
               ))}
             </tbody>

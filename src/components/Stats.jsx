@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaChartBar } from 'react-icons/fa';
 
 const Stats = () => {
-  const [filter, setFilter] = useState("controlados");
+  const [filter, setFilter] = useState("controlled");
 
   const handleFilterChange = (type) => {
     setFilter(type);
@@ -14,28 +14,28 @@ const Stats = () => {
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
         <FaChartBar className="text-green-500 text-5xl mb-4 mx-auto" />
         <p className="text-gray-400 text-center mb-4">
-          {filter === "controlados"
+          {filter === "controlled"
             ? "Gráficas de errores controlados irán aquí."
             : "Gráficas de excepciones irán aquí."}
         </p>
         <div className="flex justify-around mt-6">
           <button
             className={`px-4 py-2 rounded-lg font-semibold ${
-              filter === "controlados"
+              filter === "controlled"
                 ? "bg-green-500 text-gray-100"
                 : "bg-gray-600 text-gray-300 hover:bg-gray-500"
             }`}
-            onClick={() => handleFilterChange("controlados")}
+            onClick={() => handleFilterChange("controlled")}
           >
             Errores Controlados
           </button>
           <button
             className={`px-4 py-2 rounded-lg font-semibold ${
-              filter === "excepciones"
+              filter === "exception"
                 ? "bg-red-500 text-gray-100"
                 : "bg-gray-600 text-gray-300 hover:bg-gray-500"
             }`}
-            onClick={() => handleFilterChange("excepciones")}
+            onClick={() => handleFilterChange("exception")}
           >
             Excepciones
           </button>

@@ -83,6 +83,9 @@ export const ErrorLog = () => {
                   ) : (
                     <FaInfoCircle className="text-2xl" />
                   )}
+
+
+                  
                 </div>
                 <div>
                   <p className="mb-2">

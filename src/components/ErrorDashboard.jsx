@@ -12,7 +12,11 @@ export const ErrorDashboard = () => {
 
   // Conectar con EventSource al montar el componente
   useEffect(() => {
+<<<<<<< HEAD
     const eventSource = new EventSource('https://ptgzg54q-7209.use2.devtunnels.ms/api/ErrorLog/stream');
+=======
+    const eventSource = new EventSource('https://localhost:7209/api/ErrorLog/stream');
+>>>>>>> main
 
     // Al recibir un mensaje, agregar el error al estado
     eventSource.onmessage = (event) => {
